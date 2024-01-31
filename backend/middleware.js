@@ -1,84 +1,87 @@
-const express= require('express')
-const accountModel = require('../accountModel')
-const userModel = require('../db')
-const router = express.Router()
-const mongoose = require('mongoose')
-const zod = require('zod')
-const authMiddleware = require('../middleware')
+const express = require('express');
+const accountModel = require('../backend/routes/account');
+
+const router = express.Router();
+const mongoose = require('mongoose');
+const zod = require('zod');
+const authMiddleware = require('./middlewaree');
+
 // Get account balance
-router.post('/getAccountBalance',authMiddleware,async(req,res)=>{
-    const { userID } = req.body
-    const account = await accountModel.findOne({userID})
-    if(!account){
-        return res.json({
-            success:false,
-            message:"Something went wrong"
-        }).status(400)
+router.post('/getAccountBalance', authMiddleware, async (req, res) => {
+
+    const userID = req.user.userId; // use req.user.userId, not req.body
+    const account = await accountModel.findOne({ userID });
+    if (!account) {
+        return res.status(400).json({
+            success: false,
+            message: "Account not found"
+        });
     }
-    return res.json({
-        success:true,
-        account
-    }).status(200)
-})
+    return res.status(200).json({
+        success: true,
+        balance: account.balance 
+    });
+});
 
 const zodSchema = zod.object({
-    amount:zod.number(),
-    to:zod.string()
-})
+    amount: zod.number(),
+    to: zod.string()
+});
 
-//Make transcation using session
-router.post('/transferFunds',authMiddleware,async(req,res)=>{
-const session = await mongoose.startSession()
-session.startTransaction()
-    
-const { amount , to  }= req.body    
-const { success }  = zodSchema.safeParse(req.body )
-if(!success){
-    session.abortTransaction()
-    return res.json({
-        success:false,
-        message:"Invalid data"
-    }).status(400)
-}
-const myuserID = req.userID
-// fetching user details
-const user = await accountModel.findOne({userID:myuserID}).session(session)
-if(!user){
-    await session.abortTransaction()
-    return res.json({
-        success:false,
-        message:"Cannot find user details"
-    }).status(400)
-}
-if(user.balance < amount){
-    await  session.abortTransaction()
-    return res.json({
-        success:false,
-        message:"Insufficient balance"
-    })
-}
+// Make transaction using session
+router.post('/transferFunds', authMiddleware, async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
-// account details in which funds will be transferred
-const toAccount  = await accountModel.findOne({userID:to}).session(session)
-if(!toAccount){
-    session.abortTransaction();
-    res.json({
-        success:false,
-        message:"Cannot find user* details"
-    }).status(400)
-}
- 
-user.balance = user.balance - amount
-await user.save()
-toAccount.balance = amount + toAccount.balance 
-await toAccount.save()
+    const { amount, to } = req.body;
+    const { success } = zodSchema.safeParse(req.body);
+    if (!success) {
+        await session.abortTransaction();
+        return res.status(400).json({
+            success: false,
+            message: "Invalid data"
+        });
+    }
 
-await session.commitTransaction();
-res.json({
-    success:true,
-    message:"Transfer successfull"
-}).status(200)
+    const myUserID = req.user.userId; // use req.user.userId, assuming JWT decoding stores userID in req.user
+    // fetching user details
+    const user = await accountModel.findOne({ userID: myUserID }).session(session);
+    if (!user) {
+        await session.abortTransaction();
+        return res.status(400).json({
+            success: false,
+            message: "Cannot find user details"
+        });
+    }
 
-})
+    if (user.balance < amount) {
+        await session.abortTransaction();
+        return res.status(400).json({
+            success: false,
+            message: "Insufficient balance"
+        });
+    }
 
-module.exports = router
+    // account details in which funds will be transferred
+    const toAccount = await accountModel.findOne({ userID: to }).session(session);
+    if (!toAccount) {
+        await session.abortTransaction();
+        return res.status(400).json({
+            success: false,
+            message: "Cannot find target user details"
+        });
+    }
+
+    user.balance -= amount;
+    await user.save();
+    toAccount.balance += amount;
+    await toAccount.save();
+
+    await session.commitTransaction();
+    return res.status(200).json({
+        success: true,
+        message: "Transfer successful"
+    });
+});
+
+module.exports = router;
