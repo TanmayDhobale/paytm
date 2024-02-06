@@ -73,7 +73,7 @@ const filteredUser = bulkUsers&& bulkUsers.filter(user=> user._id !==Details._id
 <div className="min-h-screen bg-gray-100">
   <div className="bg-white shadow p-4">
     <div className='flex justify-between items-center'>
-      <div className='text-xl font-bold text-gray-800'>Wallet App</div>
+      <div className='text-xl font-bold text-gray-800'> paytm App</div>
       <div className='flex items-center gap-4'>
         <div className='font-semibold text-gray-700'>Hello, {Details.firstName}</div>
         <img src="/letter-u.png" className='w-8 h-8 rounded-full border border-gray-300 cursor-pointer p-1' onClick={() => navigate('/updateUserDetails')} alt="" />
