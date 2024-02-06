@@ -62,32 +62,39 @@ const TransferMoney = () => {
   },[])
 
   return (
-    <div className='w-screen h-screen' >
-      <div className='m-4 underline '>
-        <Link to={'/Dashboard'} > back </Link>
+   <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div className="max-w-sm mx-auto bg-white rounded-lg shadow overflow-hidden">
+    <div className="px-4 py-5 sm:p-6">
+      <div className="mb-2 text-lg font-semibold text-gray-900">Send Money</div>
+      <div className="flex items-center mb-3">
+        <img src="/letter-u.png" alt="" className="w-10 h-10 rounded-full border-2 border-gray-300 mr-3"/>
+        <h2 className="text-md font-medium text-gray-700">{TOaccountDetails.firstName}</h2>
       </div>
-      <div className='flex flex-col gap-4 m-auto min-w-[300px]  max-w-[30vw] h-[40vh] border border-slate-500 items-center mt-14 ' >
-        <div className='font-bold text-2xl mt-3' >Send Money</div>
-        <div>
-          <div className='flex min-w-[25vw] gap-3  '>
-            <div >  
-            </div> 
-            <img src="/letter-u.png" className='w-[25px] border-slate-700 border-[0.1px] rounded-[50%] p-1' alt="" />
-            </div>
-            <div className='font-bold text-xl ' >
-              {TOaccountDetails.firstName} 
-            </div>
-            <div className='flex flex-col  gap-1 mt-3 ' >
-                <label className='font-semibold text-sm ' htmlFor="">Amount (in ₹)</label>
-                <input type="text" className=' py-1 px-3 border-slate-400 rounded-md border' onChange={(e)=>setAmount(e.target.value)} placeholder='Enter Amount' />
-            </div>
-            <div className='mt-3' >
-              <button className='bg-green-600 text-white w-[100%]  py-1 text-sm font-semibold ' onClick={TransferFunds} >Initiate Transfer</button>
-            </div>
-          <div></div>
+      <form>
+        <div className="mb-1">
+          <label htmlFor="amount" className="block text-sm font-medium text-gray-700">Amount (in ₹)</label>
+          <input 
+            type="text" 
+            id="amount" 
+            className="mt-1 block w-full border border-gray-300 rounded-md text-sm py-1 px-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Enter Amount"
+          />
         </div>
-      </div>
+        <div className="mt-2">
+          <button 
+            type="button" 
+            onClick={TransferFunds}
+            className="inline-flex justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm focus:outline-none focus:shadow-outline"
+          >
+            Initiate Transfer
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+
   )
 }
 

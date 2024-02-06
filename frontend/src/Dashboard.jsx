@@ -70,37 +70,39 @@ const filteredUser = bulkUsers&& bulkUsers.filter(user=> user._id !==Details._id
     fetchUsers()
   }, [filter]);
   return (
-    <div>
-        <div className='flex justify-between ' >
-          <div className='font-bold mt-3 ml-3 ' >Wallet App</div>
-          <hr></hr>
-          <div className='flex gap-4 mr-3 mt-3' >
-            <div className='font-semibold' >Hello,{Details.firstName}</div>
-            <div className=''  > <img src="/letter-u.png" className='w-[25px] border-slate-700 hover:cursor-pointer border-[0.1px] rounded-[50%] p-1' onClick={()=> navigate('/updateUserDetails')} alt="" /> </div>
-          </div>
-        </div>
-      <div className='flex gap-3 mt-3 ml-3 font-bold' >
-        <div>Your Balance </div>
-        <div>₹{accountDetails.balance}</div>
+<div className="min-h-screen bg-gray-100">
+  <div className="bg-white shadow p-4">
+    <div className='flex justify-between items-center'>
+      <div className='text-xl font-bold text-gray-800'>Wallet App</div>
+      <div className='flex items-center gap-4'>
+        <div className='font-semibold text-gray-700'>Hello, {Details.firstName}</div>
+        <img src="/letter-u.png" className='w-8 h-8 rounded-full border border-gray-300 cursor-pointer p-1' onClick={() => navigate('/updateUserDetails')} alt="" />
       </div>
-      <div className='mt-3 ml-3' >
-          <div>
-            <input type="text" placeholder='Search Users' className='border-slate-700 rounded-md border w-[70%] py-1 px-2 ' onChange={(e)=>setfilter(e.target.value)} />
-          </div>  
-          {
-            filteredUser && filteredUser.map((users)=>(
-            <div key={users._id} className='flex justify-between mt-3' >
-              <div className='flex ml-3 gap-3' >
-                <div><img src="/letter-u.png" className='w-[25px] border-slate-700 border-[0.1px] rounded-[50%] p-1' alt="" /></div>
-                <div className='font-bold' > {users.firstName} {users.lastName}  </div>
-              </div>
-                <div className='mr-3' > <button onClick={()=>sendMoneyHandler(users._id)} className='bg-black text-white p-1.5 px-2 font-semibold rounded-sm text-sm'>Send Money</button></div>
-            </div>
-            ))
-          }
-      </div>
-
     </div>
+  </div>
+
+  <div className='p-4'>
+    <div className='bg-white shadow rounded-lg p-4'>
+      <div className='text-lg font-bold'>Your Balance</div>
+      <div className='text-xl text-green-600'>₹{accountDetails.balance}</div>
+    </div>
+
+    <div className='mt-4'>
+      <input type="text" placeholder='Search Users' className='w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-blue-500 focus:border-blue-500' onChange={(e) => setfilter(e.target.value)} />
+    </div>
+
+    {filteredUser && filteredUser.map((users) => (
+      <div key={users._id} className='flex justify-between items-center mt-3 bg-white shadow rounded-lg p-3'>
+        <div className='flex gap-3 items-center'>
+          <img src="/letter-u.png" className='w-10 h-10 rounded-full border border-gray-300' alt="" />
+          <div className='text-sm font-bold'>{users.firstName} {users.lastName}</div>
+        </div>
+        <button onClick={() => sendMoneyHandler(users._id)} className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-semibold'>Send Money</button>
+      </div>
+    ))}
+  </div>
+</div>
+
   )
 }
 

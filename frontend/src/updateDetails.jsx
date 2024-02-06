@@ -55,27 +55,30 @@ const UpdateDetails = () => {
         } ,[ID])
 
   return (
-    <div>
-        <div className='underline m-3' > <Link to={'/Dashboard'} > back</Link> </div>
-        <div className='border-slate-600 border h-[70vh] w-[35vw] pt-3 rounded-lg flex flex-col justify-center m-auto '  >
-                <div className='text-2xl text-center font-bold' >Update User Info</div>
-                <div> </div>
-                <div className='m-auto' >
-                    <label className='font-bold' htmlFor="">First Name</label> <br></br>
-                    <input onChange={(e)=>setFirstname(e.target.value)} type="text" className='border border-slate-600 px-2 py-2 '  placeholder='Enter First Name' />
-                </div>
-                <div  className='m-auto' >
-                    <label className='font-bold' htmlFor="">Last Name</label> <br></br>
-                    <input onChange={(e)=>setLastName(e.target.value)} className='border border-slate-600 px-2 py-2 '  placeholder='Enter last Name' type="text" />
-                </div>
-                <div  className='m-auto' > 
-                    <button onClick={updateUserDetail} className='bg-green-600 text-white px-4 py-2 text-sm font-bold rounded-md ' > Update User Info</button>
-                </div>
-                <div  className='m-auto' > 
-                    <button onClick={signOutHandler} className='bg-red-600 text-white px-4 py-2 text-sm font-bold rounded-md' >Sign Out</button>
-                </div>
-        </div>
+<div className="min-h-screen bg-gray-100 flex flex-col justify-center">
+  <div className='underline m-3 text-right mr-10'>
+    <Link to={'/Dashboard'} className="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">Back</Link>
+  </div>
+  <div className='bg-white shadow-xl border border-gray-200 h-[30vw] w-[70vw] pt-6 pb-8 rounded-lg flex flex-col justify-center m-auto space-y-5'>
+    <div className='text-3xl text-center font-bold text-gray-800'>Update User Info</div>
+    <div className='px-10'>
+      <div className='mb-4'>
+        <label className='block font-bold mb-2 text-gray-700' htmlFor="firstName">First Name</label>
+        <input onChange={(e) => setFirstname(e.target.value)} type="text" className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='Enter First Name' />
+      </div>
+      <div className='mb-6'>
+        <label className='block font-bold mb-2 text-gray-700' htmlFor="lastName">Last Name</label>
+        <input onChange={(e) => setLastName(e.target.value)} type="text" className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='Enter Last Name' />
+      </div>
+      <div className='flex justify-between items-center'>
+        <button onClick={updateUserDetail} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>Update User Info</button>
+        <button onClick={signOutHandler} className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>Sign Out</button>
+      </div>
     </div>
+  </div>
+</div>
+
+
   )
 }
 
