@@ -39,37 +39,54 @@ const pahochaDe = useNavigate()
     }
  
   return (
-    <Fragment>
-        <div className='h-screen w-screen text-black font-sans font-medium pt-6 bg-neutral-600 ' >
-            <div className=' bg-white w-[29vw] m-auto flex flex-col gap-2 pt-6 min-w-[300px] mt-20 border-2 rounded-lg '  > 
-            <div className='text-3xl font-bold text-center '  >
-                <h3>Sign In</h3>
-            </div>
-            <div className=' w-[70%] m-auto text-center text-slate-500 text-md ' >
-              Enter your credentials to access your account
-            </div>        
+<Fragment>
+  <div className='flex items-center justify-center h-screen bg-neutral-600 text-black font-sans'>
+    <div className='bg-white w-full max-w-md mx-auto rounded-lg border border-gray-200 shadow-lg px-6 py-8'>
+      <h3 className='text-3xl font-bold text-center mb-4'>Sign In</h3>
+      <p className='text-center text-slate-500 mb-6'>Enter your credentials to access your account</p>        
 
-            <div  className=' w-[80%] m-auto ' >
-              <div>
-              <label htmlFor="Email" className='font-bold' >Email</label>
-              </div>
-              <input
-               value={Email} required={true}
-                onChange={(e)=>setEmail(e.target.value)}  className='p-2 text-black w-[100%] mt-2 '  type="text" placeholder='Email' />
-            </div>
-            <div className=' w-[80%] m-auto ' >
-              <div>
-              <label htmlFor="password" className='font-bold' >Password</label>
-              </div>
-              <input required={true}  value={password} onChange={(e)=>setPassword(e.target.value)} className='p-2 text-black w-[100%] mt-2 '  type="password" placeholder='password' />
-            </div>
-            <div className='mt-4 mb-4  m-auto w-[100%]' >
-              <button className=' py-2 border-black border rounded-md text-center w-[80%] flex justify-center m-auto bg-black text-white ' onClick={signInHandler} >Sign In</button>
-              <div className='text-sm mt-3 text-pretty text-center font-bold ' >Don't have an account? <Link to={'/'} className='underline' >Signin</Link> </div>
-            </div>
-            </div>
-        </div>
-    </Fragment>
+      <div className='mb-4'>
+        <label htmlFor="Email" className='block font-bold mb-2'>Email</label>
+        <input
+          id="Email"
+          type="text"
+          value={Email}
+          onChange={(e) => setEmail(e.target.value)}
+          className='w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500'
+          placeholder='Enter your email'
+          required
+        />
+      </div>
+
+      <div className='mb-6'>
+        <label htmlFor="password" className='block font-bold mb-2'>Password</label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className='w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500'
+          placeholder='Enter your password'
+          required
+        />
+      </div>
+
+      <div>
+        <button
+          onClick={signInHandler}
+          className='w-full py-3 bg-black  text-white rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out'
+        >
+          Sign In
+        </button>
+      </div>
+
+      <p className='mt-4 text-center text-sm'>
+     Don't have an account? <Link to={'/'} className='underline font-medium text-blue-600  ' >Signin</Link>
+      </p>
+    </div>
+  </div>
+</Fragment>
+
   )
 }
 
