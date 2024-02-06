@@ -72,12 +72,16 @@ const pahochaDe = useNavigate()
       </div>
 
       <div>
-        <button
-          onClick={signInHandler}
-          className='w-full py-3 bg-black  text-white rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out'
-        >
-          Sign In
-        </button>
+      <button
+  onClick={signInHandler}
+  className="relative inline-flex items-center justify-center w-full px-5 py-3 overflow-hidden font-medium text-white bg-blue-600 rounded-full group"
+>
+  <span className="absolute inset-0 transition-all duration-100 ease-linear group-hover:bg-white rounded-full"></span>
+  <span className="relative text-white transition-colors duration-200 ease-in-out group-hover:text-blue-600">
+    Sign In
+  </span>
+</button>
+
       </div>
 
       <p className='mt-4 text-center text-sm'>

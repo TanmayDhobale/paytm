@@ -62,7 +62,17 @@ const AuthPage = () => {
                     <input className='mt-1 p-2 w-full border rounded-md' value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='Password' />
                 </div>
                 
-                <button type="button" className='mt-4 w-full py-2 bg-black text-white rounded-md hover:bg-opacity-90' onClick={signUpHandler}>Sign Up</button>
+              <button
+  type="button"
+  onClick={signUpHandler}
+  className="relative inline-flex items-center justify-center w-full px-5 py-2 overflow-hidden font-medium text-blue-600 bg-white border border-blue-600 rounded-md group hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+>
+  <span className="absolute inset-0 transition-all duration-100 ease-linear group-hover:bg-blue-600 rounded-md"></span>
+  <span className="relative">
+    Sign Up
+  </span>
+</button>
+
             </form>
             
             <p className='text-sm text-center font-bold mt-6'>Already have an account? <Link to={'/login'} className='text-blue-500 underline'>Login</Link></p>
