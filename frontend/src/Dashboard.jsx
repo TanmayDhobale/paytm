@@ -24,13 +24,13 @@ const Dashboard = () => {
   })
   const fetchUserDetails = async () => {
     try {
-      const { data } = await authAxios.get(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/fetchDetails`);
+      const { data } = await authAxios.get(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/fetchDetails`);
   
       if (data.success) {
         setDetails(data.user);
   
         const userID = data.user._id;
-        const { data: accountData } = await authAxios.post(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/getAccountBalance`, {
+        const { data: accountData } = await authAxios.post(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/getAccountBalance`, {
           userID
         });
   
@@ -48,7 +48,7 @@ const Dashboard = () => {
     }
   };
  const fetchUsers = async()=>{
-    const { data: bulkData } = await axios.post(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/bulk`, {
+    const { data: bulkData } = await axios.post(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/bulk`, {
       filter:filter
     });
 

@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil'
 import { userAuth } from './atoms'
 
 const AuthPage = () => {
-const url = import.meta.env.VITE_URL ?? "http://localhost:5000"
+const url = import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com/"
 const pahochaDe = useNavigate()
   const [Email, setEmail] = useState('')
   const [password, setPassword] = useState('')

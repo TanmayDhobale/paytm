@@ -20,11 +20,11 @@ const TransferMoney = () => {
   })
 
   const fetchDetails = async()=>{
-    const { data } = await authAxios.get(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/fetchDetails`);
+    const { data } = await authAxios.get(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/fetchDetails`);
     if(data.success){
       setAccountDetails(data.user)
     }
-    const { data:userDetails } = await authAxios.post(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/fetchAnyUser`,{
+    const { data:userDetails } = await authAxios.post(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/fetchAnyUser`,{
       userID:updated
     });
     if(userDetails.success){
@@ -34,14 +34,14 @@ const TransferMoney = () => {
   }
 
   const TransferFunds = async()=>{
-    const { data } = await authAxios.post(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/getAccountBalance`,{
+    const { data } = await authAxios.post(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/getAccountBalance`,{
       userID:accountDetails._id
     })
     if(data.success){
       if(data.account.balance < Amount){
         toast("Unsufficient Balance")
       } else {
-        const { data:transferFunds } = await authAxios.post(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/transferFunds`,{
+        const { data:transferFunds } = await authAxios.post(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/transferFunds`,{
             amount:Number(Amount), to:updated
           });
           if(transferFunds.success){
