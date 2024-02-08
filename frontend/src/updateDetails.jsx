@@ -24,7 +24,7 @@ const UpdateDetails = () => {
       authorization: `Bearer ${authToken} `
     }
   })
-    const { data }= await authAxios.get(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/fetchDetails`)
+    const { data }= await authAxios.get(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/fetchDetails`)
     console.log(data)
         if(data.success){
             setID(data.user.username)
@@ -39,7 +39,7 @@ const UpdateDetails = () => {
             authorization: `Bearer ${authToken} `
           }
         })
-        const { data:updatedUser }= await authAxios.put(`${import.meta.env.VITE_URL ?? "http://localhost:5000"}/v1/updateInfo`,{
+        const { data:updatedUser }= await authAxios.put(`${import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"}/v1/updateInfo`,{
             username:ID, firstName:firstName , lastName:lastName
         })
         if(updatedUser.success){

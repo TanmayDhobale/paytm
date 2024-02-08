@@ -7,7 +7,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 // import.meta.env.VITE_URL
 const AuthPage = () => {
-  const url = import.meta.env.VITE_URL ?? "http://localhost:5000"
+  const url = import.meta.env.VITE_URL ?? "https://paytmbackend-hcav.onrender.com"
   const [Email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [firstName, setfirstName] = useState('')
